@@ -1,0 +1,5 @@
+export const BASE_COLOR="#1c4a36"
+export const COVER_COLOR="#e4f5ee"
+export const BORDER_COLOR_L="#ccc"
+export const BORDER_COLOR_D="#686868"
+export const LINK_COLOR="blue"
