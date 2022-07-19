@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import fetchAdapter from '@vespaiach/axios-fetch-adapter';
 
 import {HOST} from '../constants'
 
@@ -66,7 +67,7 @@ export default class HTTP  {
     		response =await axios(
     			
           {
-    				
+    				// adapter: fetchAdapter,
     				method: this.method,
 
     				url: HOST + this.url,

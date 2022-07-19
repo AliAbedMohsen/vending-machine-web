@@ -1,0 +1,9 @@
+.select-box-item {
+    width: 100%;
+    text-align: start;
+    padding: 0.2em;
+}
+.select-box-item:hover {
+    background-color: #ccc;
+    
+}

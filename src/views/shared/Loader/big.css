@@ -1,0 +1,87 @@
+.snippet-big {
+    /* position: relative;
+    background: #fff;
+    padding: 2rem 5%;
+    margin: 1.5rem 0;
+    box-shadow: 0 .4rem .8rem -.1rem rgba(0, 32, 128, .1), 0 0 0 1px #f0f2f7; */
+    border-radius: .25rem;
+  }
+
+  .stage-big {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem 0;
+    /* margin: 0 -5%; */
+    overflow: hidden;
+  }
+
+  /* style */
+
+  :root {
+    --COLOR: #1c4a36;/*  #9880ff  */
+    --BG: #fff;   /* #ebe6ff */
+    
+  }
+
+  
+
+/**
+ * ==============================================
+ * Dot Flashing
+ * ==============================================
+ */
+ 
+.dot-flashing-big {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--COLOR);
+  color: var(--COLOR);
+  animation: dotFlashing 0.5s infinite linear alternate;
+  animation-delay: 1.5;
+}
+
+.dot-flashing-big::before, .dot-flashing-big::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  top: 0;
+}
+
+.dot-flashing-big::before {
+  left: -75px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--COLOR);
+  color: var(--COLOR);
+  animation: dotFlashing 0.5s infinite alternate;
+  animation-delay: 1s;
+}
+
+.dot-flashing-big::after {
+  left: 75px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: var(--COLOR);
+  color: var(--COLOR);
+  animation: dotFlashing-big 0.5s infinite alternate;
+  animation-delay: 0.5;
+}
+
+@keyframes dotFlashing-big {
+  0% {
+    background-color: var(--COLOR);
+  }
+  50%,
+  100% {
+    background-color: var(--BG);
+  }
+}
+
+  
+  
