@@ -1,4 +1,13 @@
+.App{
 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 100vh;
+    align-items: stretch;
+    position: relative;
+
+}
 
 .flex-row {
 
@@ -17,16 +26,45 @@
 }
 
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
+.wrap {
+  flex-wrap: wrap;
+
+ }
+
+ .f-start {
+  justify-content: flex-start;
+
+ }
+
+ .f-end {
+  justify-content: flex-end;
+
+ }
+ 
+.f-between{
+    justify-content: space-between;
+ }
+
+.v-center {
+   align-items: center;
+}
+.h-center {
+  justify-content: center;
+}
+
+.v-start {
+  align-items: flex-start;
+
+}
+
+.h-start{
+  justify-content: flex-start;
+}
+
+.w-fill{
   width: 100%;
-  border: 1px solid #ddd;
-}
+  width: -moz-available;          /* WebKit-based browsers will ignore this. */
+  width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+  width: fill-available;
 
-th, td {
-  text-align: left;
-  padding: 8px;
 }
-
-tr:nth-child(even){background-color: #f2f2f2}

@@ -1,3 +1,4 @@
 import Users from "./Users";
+import Products from "./Products";
 
-export {Users}
+export {Users, Products}

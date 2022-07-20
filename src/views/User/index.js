@@ -57,10 +57,10 @@ export default (props) => {
         return(
 
             <div className="profile-page-wrapper ">
-            
+                <h2>User Dashboard</h2>
                 <div className='profile-responsive-layout'>
                     <div className='flex-col f-start' style={{alignItems:"center", margin:"auto 1em"}} >
-
+                         
                     </div>
                     <div className='flex-col' style={{alignItems:"flex-start", justifyContent:"center", width:"inherit"}}>
                         <div className='flex-row w-fill'>

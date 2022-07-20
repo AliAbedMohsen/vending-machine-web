@@ -1,0 +1,51 @@
+.product-container{
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #777;
+    padding:1em;
+    width:10em;
+    height:15em;
+    margin: 0.3em;
+}
+
+.product-container .name-holder{
+    width: inherit;
+    height:2em;
+    padding: 0.2em;
+    margin: 0.1em;
+    font-size: x-large;
+    font-weight: 900;
+    color:var(--BASE_COLOR)
+}
+
+.product-container .available-amount{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+
+}
+
+
+
+/* Amount Picker */
+
+.amount-picker{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.amount-picker input {
+  width:3em;
+  height: 3em;
+  
+}
+
+.amount-picker button {
+
+}
