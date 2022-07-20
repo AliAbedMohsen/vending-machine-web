@@ -51,6 +51,20 @@ export default class Users {
 		return await request.send()
 	}
 
+    static async logout ( {id} ) {
+        
+        let token =  sessionStorage.getItem("AUTH_TOKEN")
+
+		let request = new HTTP()
+
+		request.setMethode("DELETE")
+         
+		request.setUrl(`/api/logout`)
+        
+        request.setHeaders({ Authorization: token})
+
+		return await request.send()
+	}
 
 
 }

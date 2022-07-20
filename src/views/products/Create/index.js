@@ -25,13 +25,20 @@ export default ( props ) => {
         try {
             const response = await Products.create(payload)
 
-            if(response.data && response.data.product) {
+            if(response.request.status===200 && response.data && response.data.product) {
         
                 window.location.replace("/products/"+response.data.product._id)
         
             } else {
-        
-                setError(response.data.reason)
+
+                if(response.request.status===400){
+                    setError(response.response.data.error)
+                } 
+
+                else {
+                    window.location.replace('/unexpected')
+                }
+                
         
             }
             
@@ -50,11 +57,12 @@ export default ( props ) => {
     
     const costError= resolveError('cost', error) 
 
-    const amountError= resolveError('amount', error) 
+    const amountError= resolveError('availableAmount', error) 
 
     return (
         <div className="create-product-container" >
             <h2>Create New Product</h2>
+            {error ? <span style={{color:"red", fontSize:"0.7em"}}> Error(s) below prevent(s) action completion.</span> : null}
             <CustomInput label="Product Name" errorText={nameError} onTextChange={(e)=>handleChange(e, 'name')} />
             
             <CustomInput label="Product Amount" errorText={amountError}  type={"number"} onTextChange={(e)=>handleChange(e, 'availableAmount')}  />

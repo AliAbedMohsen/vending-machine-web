@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './index.css'
-import CustomInput from '../../shared/CustomInput'
+import CustomInput from '../../../shared/CustomInput'
 import {AsynchronousReactButton as ARB} from 'asynchronous-react-button'
-import { Products } from "../../../server-api";
-import Helpers from '../../shared/Helpers.js'
+import { Products } from "../../../../server-api";
+import Helpers from '../../../shared/Helpers.js'
 import BigLoader from '../../shared/Loader/big'
 
 const resolveError= Helpers.resolveError
@@ -27,7 +27,7 @@ export default ( props ) => {
     
     const fetchProduct = async () => {
         
-        let pid = props.match.params.pid
+        let pid = props.match.params.id
         
         try {
             const response = await Products.product({pid})
@@ -54,9 +54,7 @@ export default ( props ) => {
     const submit = async (releaseBtn) => {
         
         try {
-            let pid = props.match.params.pid
-            let uid = props.match.params.id
-            const response = await Products.update( {uid, pid}, payload )
+            const response = await Products.create(payload)
 
             if(response.data && response.data.product) {
         
@@ -64,13 +62,8 @@ export default ( props ) => {
         
             } else {
         
-                if(response.request.status===400){
-                    setError(response.response.data.error)
-                } 
-
-                else {
-                    window.location.replace('/unexpected')
-                }        
+                setError(response.data.reason)
+        
             }
             
             releaseBtn()
@@ -95,20 +88,18 @@ export default ( props ) => {
     
         const costError= resolveError('cost', error) 
 
-        const amountError= resolveError('availableAmount', error) 
+        const amountError= resolveError('amount', error) 
 
         return (
             <div className="edit-product-container" >
                 <h2>Edit Product</h2>
-                {error ? <span style={{color:"red", fontSize:"0.7em"}}> Error(s) below prevent(s) action completion.</span> : null}
-
                 <CustomInput defaultValue={product.name} label="Product Name" errorText={nameError} onTextChange={(e)=>handleChange(e, 'name')} />
                 
                 <CustomInput defaultValue={product.availableAmount} label="Product Amount" errorText={amountError}  type={"number"} onTextChange={(e)=>handleChange(e, 'availableAmount')}  />
 
                 <CustomInput defaultValue={product.cost} label="Product Cost"  errorText={costError}  type={"number"} onTextChange={(e)=>handleChange(e, 'cost')}  />
 
-                <ARB onClick={submit} label={"Save Changes"} />
+                <ARB onClick={submit} label={"Submit"} />
             </div>
         )
     }

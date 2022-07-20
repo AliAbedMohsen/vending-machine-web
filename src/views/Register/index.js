@@ -40,56 +40,26 @@ const Register = (props) => {
             
             let response = await Users.register(payload)
             
-            let {data, message} = response
-            
-            if(data ){
-
-                if(data.user){
-                    debugger
-                    localStorage.setItem('USER_ID', data.user._id)
-                    
-                    // localStorage.setItem('AUTH_TOKEN', data.authToken.token)
-                    
-                    window.open(`/login`,"_self")
-                
-                
-                } else {
-                    
-                
-                    setError(data.error)
-                
-                } 
-
-                releaseBtn()
-            
+            if(response && response.data ) {
+                window.open(`/login`,"_self")
+            } else if(response.request.status===400) {
+                setError(response.response.data.error)
             } else {
-                
-                if(response.response.data.message === "Unauthorized") {
-                    
-                    // props.history.push("/")
-                    window.open("/login","_self") 
-
-                } else {
-
-                    alert('unhandeled error: details printed in developer tools console')
-                    
-                    console.log('unhandeled error', response.response.data)
-                    
-                    releaseBtn()
-
-                }
-
+                window.open(`/unexpected`,"_self")
             }
+        
+            releaseBtn()
+
 
         } catch (err) {
 
-           alert("err catch in register > onSubmit: check console for details")
             
            console.log('catched error in register > onSubmit ', err)  
            
            releaseBtn()
-        }
 
+           window.open(`/unexpected`,"_self")
+        }
         
     }
 
@@ -104,14 +74,12 @@ const Register = (props) => {
     return(
         <div style={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column", paddingTop:"2%"}}>
             <div style={{ textAlign:"center"}}>
-                {/* <img src={LOGO_DARK} style={{ height:"200px"}} /> */}
-                <span>VENDING MACHINE</span>
+                {/* <span>VENDING MACHINE</span> */}
             </div>
             <div className="register-page-wrapper">
                 {/* full name & email */}
                 <div className="icon-container">
 	      
-                    {/* <img src={ICON} /> */}
                     <span style={{color:BASE_COLOR, fontSize:"1.5em", fontWeight:"900"}}>Create New Account!</span>
             
                 </div> 
@@ -120,7 +88,7 @@ const Register = (props) => {
             
                     <CustomInput 
                         style={{width:"15em",  margin:"0.5em auto", border:`1px solid ${BASE_COLOR}`}}
-                        placeholder={'new secure password'} 
+                        placeholder={'pickup a username..'} 
                         errorText={nameError} 
                         onTextChange={(e) => onAttributeChange(e.target.value, 'username')} 
                         label={"Username"}
@@ -131,7 +99,7 @@ const Register = (props) => {
                                 
                     <CustomInput 
                     	style={{width:"15em",  margin:"0.5em auto", border:`1px solid ${BASE_COLOR}`}}
-                        placeholder={''} 
+                        placeholder={'new secure password'} 
                         errorText={passwordError} 
                         onTextChange={(e) => onAttributeChange(e.target.value, 'password')} 
                         label={"Password"} 

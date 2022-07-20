@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {Users} from "../../server-api"
 import {  Link, useLocation } from 'react-router-dom';
 import './index.css'
-
+import { AsynchronousReactButton as ARB } from 'asynchronous-react-button';
 import { BASE_COLOR } from '../../constants/style';
 
 
@@ -27,40 +27,36 @@ const Navbar = (props) => {
 
   const [activeLink, setActiveLink]= useState( props.location ? props.location.pathname :null )
 
-  const logout = async () => {
+  const logout = async ( releaseBtn ) => {
     
     try{
+
         let response = await Users.logout({user_id})
+      
+        if(response.data && response.data.message === "LOGOUT_SUCCEEDED"){
+      
+            reset()
 
-        let {data} = response
+            window.open("/", "_self") 
+      
+          } else {
+      
+            reset()
+      
+            window.open("/", "_self") 
+      
+          }
+      
+          releaseBtn()
 
-        if(data) {
-
-            if(data.message === "LOGOUT_SUCCEEDED") {
-          
-                reset()
-
-              window.open("/","_self") 
-
-            }
-            
-        } else {
-          
-            if(response.response.data.message === "Unauthorized") {
-                  reset()
-                // props.history.push("/")
-                  window.open("/","_self") 
-
-            } else {
-
-                alert('unhandeled error: details printed in developer tools console')
-                
-                console.log('unhandeled error', response.response.data)
-              
-            }
-        }
       } catch (err) {
+
+        releaseBtn()
+      
         console.log("logout failed", err)
+      
+        window.open("/unexpected", "_self") 
+      
       }
 
   }
@@ -103,13 +99,14 @@ const Navbar = (props) => {
      setUserRole(sessionStorage.getItem('ROLE') )
      setActiveLink(location.pathname)
 
-  }, [location.pathname])
+  }, [])
   
   const reset= () => {
-    sessionStorage.setItem('AUTH_TOKEN', undefined)
-    sessionStorage.setItem('USER_ID', undefined )
-    sessionStorage.setItem('ROLE', undefined )
-    sessionStorage.setItem('USERNAME', undefined )
+    sessionStorage.removeItem('AUTH_TOKEN')
+    sessionStorage.removeItem('USER_ID')
+    sessionStorage.removeItem('ROLE' )
+    sessionStorage.removeItem('USERNAME')
+    
   }
 
   let links = [
@@ -117,6 +114,7 @@ const Navbar = (props) => {
   ]
 
   const rightLinks= [
+    // {name:`Welcome ${username}!`}
           // {name:"My Balance", url:"/balance"},
     // {name:"Dashboard", url:`/users/${user_id}/dashboard` },
 
@@ -128,11 +126,13 @@ const Navbar = (props) => {
   
   if(!user_id || !token || user_id==="undefined" || token==="undefined" ) {
 
-      rightLinks.push(
-        {name:"Login", url:"/login" },
-        //  {name:"Register", url:"/register" } 
-      )
+      links.push(
+        {name:"All Products", url:"/products" },
 
+        {name:"Login", url:"/login" },
+        {name:"Register", url:"/register" },
+      )
+      
 
   } else if(user_id && token ) {
       rightLinks.push(
@@ -145,14 +145,14 @@ const Navbar = (props) => {
           {name:"My Products", url:`/products` },
           {name:"Dashboard", url:`/users/${user_id}` },
           {name:"Create Product", url:`/products/create` },
-          {name:"Logout", onClick:()=>logout() }
+          {name:"Logout", onClick:logout }
         )
       } else { //BUYER
         
         links.push(
           {name:"Products", url:`/products`},
           {name:"Dashboard", url:`/users/${user_id}` },
-          {name:"Logout", onClick:()=>logout() }
+          {name:"Logout", onClick:logout }
 
         )
       }
@@ -171,7 +171,6 @@ const Navbar = (props) => {
           
         </div>
         <div className="site-header__middle">
-          
           <nav className="nav">
             <button  
               onClick={onMenuClick} 
@@ -184,7 +183,7 @@ const Navbar = (props) => {
             </button>
             
             <ul ref={navWrapper} className={`nav__wrapper ${isLinksListOpen ? 'active' : ''}`}>
-
+              {token? <li className='nav__item'><a >{`Welcome ${username}!`}</a></li>:null}
               {
                 links.map((link, index) => {
                   if(link.url){
@@ -196,7 +195,8 @@ const Navbar = (props) => {
                   } else {
                     return(
                       <li className="nav__item" key={index}>
-                        <a className="" onClick={link.onClick || null } style={{margin:"auto 0.1em"}} key={index} href={link.url}>{link.name}</a>
+                        <ARB style={{margin:"auto 0.1em"}} label={link.name} onClick={link.onClick}/>
+                        {/* <a className="" onClick={link.onClick || null } style={{margin:"auto 0.1em"}} key={index} href={link.url}>{link.name}</a> */}
                       </li>
                     )
                   }

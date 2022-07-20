@@ -42,7 +42,6 @@ const Login= ( props ) => {
 		try{
            
            let response = await Users.login(credencials)
-           debugger
            
            let {data, message } = response
            
