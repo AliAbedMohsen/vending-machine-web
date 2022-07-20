@@ -27,9 +27,13 @@ function App() {
       {name:"User", url:"/users/:id", component:User},
 
       {name:"Products", url:"/", component:Products},
+
+      {name:"Products", url:"/products", component:Products},
+
       {name:"Create Product", url:"/products/create", component:CreateProduct},
 
       {name:"Product", url:"/products/:id", component:Product},
+
       {name:"My Products", url:"/users/:id/products", component:Products},
 
       {name:"Edit Product", url:"/users/:id/products/:pid/edit", component:EditProduct},
@@ -52,7 +56,7 @@ function App() {
                         
                       return(
                             
-                            <Route exact path={link.url} component={link.component} />
+                            <Route key={index} exact path={link.url} component={link.component} />
 
                       )
                     

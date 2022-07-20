@@ -54,6 +54,7 @@ export default ( props ) => {
 
     return (
         <div className="create-product-container" >
+            <h2>Create New Product</h2>
             <CustomInput label="Product Name" errorText={nameError} onTextChange={(e)=>handleChange(e, 'name')} />
             
             <CustomInput label="Product Amount" errorText={amountError}  type={"number"} onTextChange={(e)=>handleChange(e, 'availableAmount')}  />

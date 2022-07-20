@@ -72,29 +72,29 @@ const Navbar = (props) => {
     }
   }
 
-  useEffect(() => {
+//   useEffect(() => {
     
-    const navbar = nav && nav.current ? nav.current : null
+//     const navbar = nav && nav.current ? nav.current : null
 
-    if(navbar) {
-      window.addEventListener('scroll', (event)=> {
-          // let elem=  document.querySelector('body')//event.srcElement.body
-          // console.log('scroll top', navbar.scrollHeight)
-          if(window.scrollY <= 20 ){
-            // navbar.removeClass('navbar-scroll');
-            navbar.classList.remove("navbar-scroll");
-            // alert(1)
-          } else {
-            // alert(2)
-            // navbar.addClass('navbar-scroll');
-            navbar.classList.add("navbar-scroll");
-          }
-      })
+//     if(navbar) {
+//       window.addEventListener('scroll', (event)=> {
+//           // let elem=  document.querySelector('body')//event.srcElement.body
+//           // console.log('scroll top', navbar.scrollHeight)
+//           if(window.scrollY <= 20 ){
+//             // navbar.removeClass('navbar-scroll');
+//             navbar.classList.remove("navbar-scroll");
+//             // alert(1)
+//           } else {
+//             // alert(2)
+//             // navbar.addClass('navbar-scroll');
+//             navbar.classList.add("navbar-scroll");
+//           }
+//       })
 
-      return () => window.removeEventListener("scroll", null)
-    }
+//       return () => window.removeEventListener("scroll", null)
+//     }
 
-}, [navWrapper])
+// }, [navWrapper])
 
   useEffect(()=>{
   	 setToken( sessionStorage.getItem('AUTH_TOKEN') )

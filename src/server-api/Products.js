@@ -48,7 +48,7 @@ export default class Users {
 
 		request.setMethode("GET")
          
-		request.setUrl(`/api/products/${params.id}`)
+		request.setUrl(`/api/products/${params.pid}`)
         
         request.setHeaders({ Authorization: token})
 

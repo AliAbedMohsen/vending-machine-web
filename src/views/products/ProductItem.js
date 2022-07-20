@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 
 export default ( props ) => {
 
-    const [product, setProduct] = useState(null)
-    const [payload, setPayload] = useState({pid:props.data._id})
+    const [product, setProduct] = useState({})
+    const [payload, setPayload] = useState({})
 
     useEffect(()=> {
         setProduct(props.data)
@@ -16,7 +16,7 @@ export default ( props ) => {
 
     return (
         <div className="product-container">
-            <span className="name-holder">Poduct Name</span>
+            <span className="name-holder"><a href={`/products/${product._id}`}>{product.name}</a></span>
             <div className="available-amount" >
                 <span>Available:</span>
                 <span>{product.availableAmount}</span>

@@ -11,7 +11,7 @@ export default ( props ) => {
     const fetchProducts = async () => {
        try {
             const response = await Products.products()
-
+            debugger
             if(response.data) {
                 setProducts(response.data.products)
             } else {
@@ -30,6 +30,7 @@ export default ( props ) => {
     }
     
     useEffect(()=> fetchProducts, [])
+
     if(isLoading){
     
         <div style={{height:"20em", position:"relative"}}><BigLoader active={true} /></div>
