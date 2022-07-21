@@ -4,7 +4,11 @@ import  dateFormat from "date-format"
 export default class Helpers {
 
     static  resolveError = (attribute, error, isNested=false, nestedKey) => {
-        
+      
+        if(typeof error==="string") {
+          return error
+        } 
+
         if(error  && error.name==="CastError"){
   
             return error.path ===attribute ?  `invalid ${attribute} value` : ''
@@ -32,8 +36,6 @@ export default class Helpers {
           }
         
         }
-        
-      
     
     }
 

@@ -77,7 +77,8 @@ const Register = (props) => {
                 {/* <span>VENDING MACHINE</span> */}
             </div>
             <div className="register-page-wrapper">
-                {/* full name & email */}
+
+
                 <div className="icon-container">
 	      
                     <span style={{color:BASE_COLOR, fontSize:"1.5em", fontWeight:"900"}}>Create New Account!</span>

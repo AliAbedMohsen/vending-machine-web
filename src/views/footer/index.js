@@ -14,8 +14,7 @@ const Footer = (props) =>{
 
         
 	        <div className="flex-col">
-	            <p className="copyright-text">Copyright &copy; 2022 All Rights Reserved by 
-	              <a href="#" > vending-machine.com</a>.
+	            <p className="copyright-text">Copyright &copy; 2022 All Rights Reserved.
 	            </p>
 	        </div>
 

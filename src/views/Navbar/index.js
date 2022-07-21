@@ -195,8 +195,8 @@ const Navbar = (props) => {
                   } else {
                     return(
                       <li className="nav__item" key={index}>
-                        <ARB style={{margin:"auto 0.1em"}} label={link.name} onClick={link.onClick}/>
-                        {/* <a className="" onClick={link.onClick || null } style={{margin:"auto 0.1em"}} key={index} href={link.url}>{link.name}</a> */}
+                  
+                        <a className="" onClick={link.onClick || null } style={{margin:"auto 0.1em"}} key={index} href={link.url}>{link.name}</a>
                       </li>
                     )
                   }

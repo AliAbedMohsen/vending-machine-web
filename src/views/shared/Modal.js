@@ -23,6 +23,7 @@ function CustomModal(props) {
   const [modalIsOpen, setIsOpen] = React.useState(false);
 
   function openModal() {
+    if(props.onOpen) props.onOpen()
     setIsOpen(true);
   }
 
@@ -32,6 +33,8 @@ function CustomModal(props) {
   }
 
   function closeModal() {
+    if(props.onClose) props.onClose() 
+
     setIsOpen(false);
   }
 
@@ -39,7 +42,7 @@ function CustomModal(props) {
     
     <div>
       
-      <button onClick={openModal}>{props.openButton}</button>
+      <button style={props.btnStyle || {}} onClick={openModal}>{props.openButton}</button>
       
       <Modal
         isOpen={modalIsOpen}

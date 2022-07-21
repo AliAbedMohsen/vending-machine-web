@@ -66,6 +66,22 @@ export default class Users {
 		return await request.send()
 	}
 
+	static async deposit ( body ) {
+
+		let request = new HTTP()
+
+		let token =  sessionStorage.getItem("AUTH_TOKEN")
+
+		request.setHeaders({ Authorization: token})
+
+		request.setMethode("PUT")
+
+		request.setUrl("/api/deposit")
+        
+        request.body = body
+
+		return await request.send()
+	}
 
 }
 
