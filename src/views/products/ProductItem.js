@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { AsynchronousReactButton as ARB} from "asynchronous-react-button";
 export default ( props ) => {
 
     const [product, setProduct] = useState({})
@@ -7,11 +7,13 @@ export default ( props ) => {
 
     useEffect(()=> {
         setProduct(props.data)
-        setPayload({pid:props.data._id})
+        
     }, [props.data])
+    
+    useEffect(()=>{ if(product&& product._id) setPayload({productId:product._id}) }, [product])
 
-    const handlePickedAmount = ({target})=> {
-       setPayload({...payload, amount:target.value})
+    const handlePickedAmount = (value)=> {
+       setPayload({...payload, amount:value})
     }
 
     return (
@@ -21,7 +23,13 @@ export default ( props ) => {
                 <span>Available:</span>
                 <span>{product.availableAmount}</span>
             </div>
+
+            <div className="available-amount" >
+                <span>Cost:</span>
+                <span>{product.cost}</span>
+            </div>
             <AmountPicker onChange={handlePickedAmount} availableAmount={product.availableAmount} />
+            <ARB onClick={(rb) => props.buy(rb, payload )} label="Buy" />
         </div>
     )
 }
@@ -34,6 +42,7 @@ const AmountPicker= ( {onChange, availableAmount} ) => {
         availableAmount= parseInt(availableAmount)
         if( availableAmount >= newValue ){
             setValue(newValue)
+            onChange(newValue)
         }
     
     }
@@ -42,6 +51,7 @@ const AmountPicker= ( {onChange, availableAmount} ) => {
         let newValue= parseInt(value) - 1
         if(  newValue > 0 ){
             setValue(newValue)
+            onChange(newValue)
         }
     }
 

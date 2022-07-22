@@ -3,6 +3,7 @@ import './index.css'
 import BigLoader from '../../shared/Loader/big'
 import { Products } from "../../../server-api";
 import {AsynchronousReactButton as ARB} from 'asynchronous-react-button'
+import Helpers from "../../shared/Helpers";
 export default ( props ) => {
     
 
@@ -87,7 +88,7 @@ export default ( props ) => {
 
                 <div className="flex-row f-between" style={{width:"17em"}}>
                     <span>Added at:</span>
-                    <span>{product.created_at}</span>
+                    <span>{Helpers.formatDatetime(product.created_at) }</span>
                 </div>
 
                 <div className="flex-row f-between" style={{width:"17em"}}>

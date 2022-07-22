@@ -83,6 +83,38 @@ export default class Users {
 		return await request.send()
 	}
 
+	static async buy ( body ) {
+
+		let request = new HTTP()
+
+		let token =  sessionStorage.getItem("AUTH_TOKEN")
+
+		request.setHeaders({ Authorization: token})
+
+		request.setMethode("PUT")
+
+		request.setUrl("/api/buy")
+        
+        request.body = body
+
+		return await request.send()
+	}
+
+	
+	static async withdraw ( body ) {
+
+		let request = new HTTP()
+
+		let token =  sessionStorage.getItem("AUTH_TOKEN")
+
+		request.setHeaders({ Authorization: token})
+
+		request.setMethode("PUT")
+
+		request.setUrl("/api/reset")
+        
+		return await request.send()
+	}
 }
 
    
