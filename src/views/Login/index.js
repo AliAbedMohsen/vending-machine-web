@@ -47,9 +47,9 @@ const Login= ( props ) => {
            
            if(data){
               
-                const {authToken, user, message}= data
+                const {token, user, message, multiActiveSessions}= data
                 
-                if(user && authToken){
+                if(user && token){
 
 
 					sessionStorage.setItem('USER_ID', user._id)
@@ -58,11 +58,15 @@ const Login= ( props ) => {
                     
                     sessionStorage.setItem('USERNAME', user.username)
 
-					sessionStorage.setItem('AUTH_TOKEN', authToken.token)
+					sessionStorage.setItem('AUTH_TOKEN', token)
 					
 
 	                releaseBtn()
                     
+					if(multiActiveSessions) {
+                     debugger
+					}
+
 					window.location.replace("/users/"+user._id)
 
 

@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import {HOST} from '../constants'
 
+axios.defaults.withCredentials=true
 export default class HTTP  {
    
     constructor ( method, url, params, body, headers, uploadProgressHandler ) {
@@ -69,9 +70,11 @@ export default class HTTP  {
           {
     				// adapter: fetchAdapter,
     				method: this.method,
-
+            
     				url: HOST + this.url,
-                    
+            
+            withCredentials:true,
+
             headers: this.headers,
 
     				params: this.params,

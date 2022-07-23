@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react'
 import './index.css'
 
 import BigLoader from '../shared/Loader/big'
-import { Users } from '../../server-api'
+import { Users, Ping } from '../../server-api'
 import Deposit from './Deposit'
 import { AsynchronousReactButton as ARB } from 'asynchronous-react-button'
 export default (props) => {
@@ -45,6 +45,29 @@ export default (props) => {
         
     }
 
+    const test = async (releaseBtn)=> {
+        
+        try{
+                   
+            let response = await Ping.test()
+            debugger
+            if(response.data && response.data){
+
+               
+            } else {
+                
+                
+                window.location.replace("/unexpected?s="+response.request.status)
+            }
+            releaseBtn()
+        }catch(error){
+            releaseBtn()
+            // window.location.replace("/unexpected?e="+error)
+        }  
+    
+        
+    }
+    
     useEffect(()=>{
         
         getResources()    
@@ -76,6 +99,12 @@ export default (props) => {
                             <ARB 
                                 onClick={()=>alert('Reset!')} 
                                 label="Reset Deposit" 
+                                btnStyle={{height:"4em", width:"8em", margin:"0.2em"}}
+                            />
+
+                            <ARB 
+                                onClick={test} 
+                                label="test sessions" 
                                 btnStyle={{height:"4em", width:"8em", margin:"0.2em"}}
                             />
                         </div> 

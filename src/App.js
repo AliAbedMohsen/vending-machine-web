@@ -49,6 +49,7 @@ function App() {
 	    
             <Navbar routes={routes} />
             <div style={{height:"inherit", paddingBottom:"100px"}}>
+              <div className='page-wrapper'>
               <Switch>
             
                 {   
@@ -68,6 +69,7 @@ function App() {
               
             
               </Switch>
+              </div>
             </div>  
 	       </Router>
 	       <Footer />

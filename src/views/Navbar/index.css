@@ -25,9 +25,15 @@ ul.nav__wrapper li {
     /* background-color: var(--COVER_COLOR); */
     /* background: rgb(228,245,238);
     background: linear-gradient(90deg, rgba(228,245,238,1) 0%, rgba(28,74,54,1) 95%); */
-    background: rgb(244,252,249);
-    background: linear-gradient(90deg, rgba(244,252,249,1) 0%, rgba(228,245,238,1) 95%);
-
+    
+    /* background: rgb(244,252,249); */
+    /* background: linear-gradient(90deg, rgba(244,252,249,1) 0%, rgba(228,245,238,1) 95%); */
+    
+    background-color: #fff; 
+    border-bottom: 1px solid #fff;
+    /*box-shadow: 0px 3px 6px 8px #777; */
+    box-shadow: 0px 7px 8px -3px #777 ;
+    margin-bottom: 1em;
     height:60px;
 
 }
