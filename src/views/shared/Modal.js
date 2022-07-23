@@ -1,6 +1,6 @@
 // Modal.js
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 
@@ -31,6 +31,8 @@ function CustomModal(props) {
     // references are now sync'd and can be accessed.
     // subtitle.style.color = '#f00';
   }
+  
+  useEffect(()=> { setIsOpen(false); } , [props.forceClose])
 
   function closeModal() {
     if(props.onClose) props.onClose() 
@@ -40,9 +42,9 @@ function CustomModal(props) {
 
   return (
     
-    <div>
+    <div style={{display:"flex"}}>
       
-      <button style={props.btnStyle || {}} onClick={openModal}>{props.openButton}</button>
+      <button style={props.openBtnStyle || {}} onClick={openModal}>{props.openButton}</button>
       
       <Modal
         isOpen={modalIsOpen}
@@ -53,7 +55,7 @@ function CustomModal(props) {
       >
         <div className="flex-col">
 
-           <button onClick={closeModal}>{props.closeButton}</button>
+           <button style={{alignSelf:"flex-start"}} onClick={closeModal}>{props.closeButton}</button>
 
            {props.children}
 

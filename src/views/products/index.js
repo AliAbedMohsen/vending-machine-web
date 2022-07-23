@@ -93,7 +93,7 @@ export default ( props ) => {
     } else {
     
         return(
-            <div className="flex-row f-start w-fill wrap">
+            <div className="products-container flex-row f-start w-fill wrap">
                 {
                     products.map((p, index) => {
                         return <ProductItem buy={buy} key={index} data={p}/>

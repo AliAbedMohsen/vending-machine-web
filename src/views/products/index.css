@@ -1,3 +1,8 @@
+.products-container{
+    margin: auto;
+}
+
+
 .product-container{
 
     display: flex;
@@ -7,8 +12,9 @@
     border: 1px solid #777;
     padding:1em;
     width:10em;
-    height:15em;
+    height:auto;
     margin: 0.3em;
+    border-radius: 5px;
 }
 
 .product-container .name-holder{
@@ -20,16 +26,59 @@
     font-weight: 900;
     color:var(--BASE_COLOR);
     text-align: center;
+    background-color: #ccc;
+}
+.product-container .name-holder a {
+  text-decoration: none;
+  color: var(--BASE_COLOR);
+}
+
+.product-container .name-holder a:hover{
+    color:#fff
 }
 
 .product-container .available-amount{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     width: 100%;
+    
 
 }
 
+.product-container .available-amount span {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: red;
+}
+
+.product-container .available-amount label {
+    font-size: 0.8em;
+    font-weight: bolder;
+    color: #000;
+}
+
+.product-container .cost{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+
+}
+
+.product-container .cost label {
+    font-size: 0.8em;
+    font-weight: bolder;
+    color: #000;
+}
+
+.product-container .cost span {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: green;
+}
 
 
 /* Amount Picker */
@@ -38,17 +87,55 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 1em;
     width: inherit;
+    /* background-color: #ccc; */
+    border-bottom: 1px solid #ccc;
+}
+
+.amount-picker .label-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+
+}
+
+.amount-picker .label-container label{
+    font-size: 0.8em;
+    font-weight: bold;
 }
 
 .amount-picker input {
-  width:3em;
+  width:2em;
   height: 3em;
+  text-align: center;
+  outline: none;
+  border: none;
+  font-size: large;
+  font-weight: 900;
   
 }
 
-.amount-picker button {
+.total  {
+  margin-top: 0.5em;
+}
 
+.total label{
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.total span{
+    font-size: 0.8em;
+    font-weight: bold;
+    color:orange
+}
+
+@media (max-width:500px) {
+    .products-container{
+        justify-content: center !important;
+    }
 }
