@@ -65,8 +65,8 @@ export default (props) => {
 
                         <div className='role-options flex-row w-fill f-around wrap' >
 
-                            <a href={"/products/create"}>Add New Product</a>
-                            <a href={`/users/${user._id}/products`}>My Products</a>
+                            <a className="custom-button" href={"/products/create"}>Add New Product</a>
+                            <a className="custom-button" href={`/users/${user._id}/products`}>My Products</a>
                         </div> 
                     </div>
 
