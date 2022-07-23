@@ -67,7 +67,25 @@ export default (props) => {
     
         
     }
+
+    const reset = async (releaseBtn)=> {
+        
+        try{
+                   
+            let response = await Users.withdraw()
+            
+            if(response.data && response.data){
+               alert("Your deposit have reset.")
+               
+            }
+            releaseBtn()
+        }catch(error){
+            releaseBtn()
+            // window.location.replace("/unexpected?e="+error)
+        }  
     
+        
+    }
     useEffect(()=>{
         
         getResources()    
@@ -83,23 +101,43 @@ export default (props) => {
         
         return(
 
-            <div className="profile-page-wrapper ">
+            <div className="dashboard-page-wrapper ">
                 <h2>User Dashboard</h2>
                 <div className='flex-col'>
                     <span>
                         {`Hey ${user.username}! Here are the available actions for you as a ${user.role.toLowerCase()}.`}
                     </span>
                     <div className='flex-col w-fill f-start' style={{alignItems:"center", margin:"2em"}} >
-                    <span>Deposit: {" "+user.deposit+" Cents"}</span>
+                    <div className='flex-row w-fill'>
+                        <span 
+                            style={{
+                                width:"100%",
+                                borderBottom:"1px solid #ccc",
+                                textAlign:"center",
+                                margin:"1em",
+                                padding:"1em"
+                            }}
+                        >
+                            Deposit: {" "+user.deposit+" Cents"}
+                        </span>
+                    </div>
 
-                        <div className='flex-row w-fill f-between wrap' >
+                        <div className='role-options flex-row w-fill f-between wrap' >
 
-                            <Deposit updateDeposit={updateDeposit} deposit={user.deposit} />
+                            <Deposit 
+                                updateDeposit={updateDeposit} 
+                                deposit={user.deposit} 
+                            />
 
                             <ARB 
-                                onClick={()=>alert('Reset!')} 
+                                onClick={reset} 
                                 label="Reset Deposit" 
                                 btnStyle={{height:"4em", width:"8em", margin:"0.2em"}}
+                                confirm={{
+                                    message:"You are about to reset your deposit! Are you sure?",
+                                    ok:"Yes",
+                                    cancel:"No"
+                                }}
                             />
 
                             <ARB 
@@ -108,12 +146,6 @@ export default (props) => {
                                 btnStyle={{height:"4em", width:"8em", margin:"0.2em"}}
                             />
                         </div> 
-                    </div>
-                    <div className='flex-col' style={{alignItems:"flex-start", justifyContent:"center", width:"inherit"}}>
-                        <div className='flex-row w-fill'>
-                        </div>
-
-
                     </div>
 
 

@@ -5,6 +5,8 @@ import ProductItem from "./ProductItem";
 import { Products, Users } from "../../server-api";
 import Dialog from "../shared/Dialog/Dialog";
 import { AsynchronousReactButton as ARB } from "asynchronous-react-button";
+import { BASE_COLOR } from "../../constants/style";
+
 export default ( props ) => {
     
     let [isLoading, setIsLoading] = useState(true) 
@@ -93,14 +95,19 @@ export default ( props ) => {
     } else {
     
         return(
-            <div className="products-container flex-row f-start w-fill wrap">
-                {
-                    products.map((p, index) => {
-                        return <ProductItem buy={buy} key={index} data={p}/>
-                    })
-                }
+            <div style={{width:"100%"}}>
+                <span style={{color:BASE_COLOR, fontSize:"1.5em", fontWeight:"900", borderBottom:"1px solid #000"}}>All Products</span>
 
-                <Invoice collectChange={collectChange} onClose={()=> setInvoice({open:false, data:{} }) } invoice={invoice} />
+                
+                <div className="products-container flex-row f-start w-fill wrap">
+                    {
+                        products.map((p, index) => {
+                            return <ProductItem buy={buy} key={index} data={p}/>
+                        })
+                    }
+
+                    <Invoice collectChange={collectChange} onClose={()=> setInvoice({open:false, data:{} }) } invoice={invoice} />
+                </div>
             </div>
         )
     }       

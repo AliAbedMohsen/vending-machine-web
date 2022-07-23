@@ -4,6 +4,8 @@ import BigLoader from '../../shared/Loader/big'
 import { Products } from "../../../server-api";
 import {AsynchronousReactButton as ARB} from 'asynchronous-react-button'
 import Helpers from "../../shared/Helpers";
+import { BASE_COLOR } from "../../../constants/style";
+
 export default ( props ) => {
     
 
@@ -64,42 +66,58 @@ export default ( props ) => {
 
     if(isLoading){
     
-        <div style={{height:"17em", position:"relative"}}><BigLoader active={true} /></div>
+        <div style={{height:"20em", position:"relative"}}><BigLoader active={true} /></div>
     
     } else {
     
         return(
             <div className="flex-col">
-                <h2>Product Details</h2>
-                <div className="flex-row f-between" style={{width:"17em"}}>
+                {/* <h2>Product Details</h2> */}
+                <span style={{color:BASE_COLOR, fontSize:"1.5em", fontWeight:"900"}}>Product Details</span>
+
+                <div className="flex-row f-between" style={{width:"16em"}}>
                     <span>Product Name:</span>
                     <span>{product.name}</span>
                 </div>
 
-                <div className="flex-row f-between" style={{width:"17em"}}>
+                <div className="flex-row f-between" style={{width:"16em"}}>
                     <span>Product Cost:</span>
                     <span>{product.cost+" Cents"}</span>
                 </div>
 
-                <div className="flex-row f-between" style={{width:"17em"}}>
+                <div className="flex-row f-between" style={{width:"16em"}}>
                     <span>Available Amount:</span>
                     <span>{product.availableAmount}</span>
                 </div>
 
-                <div className="flex-row f-between" style={{width:"17em"}}>
-                    <span>Added at:</span>
+                <div className="flex-row f-between" style={{width:"16em"}}>
+                    <span>Created at:</span>
                     <span>{Helpers.formatDatetime(product.created_at) }</span>
                 </div>
-
-                <div className="flex-row f-between" style={{width:"17em"}}>
+                <div className="flex-row f-between" style={{width:"16em"}}>
+                    <span>Updated at:</span>
+                    <span>{Helpers.formatDatetime(product.updated_at) }</span>
+                </div>
+                <div className="flex-row f-between" style={{width:"16em"}}>
                     <span>Seller :</span>
                     <span>{product.seller.username}</span>
                 </div>
                 {
                     sessionStorage.getItem("AUTH_TOKEN") && sessionStorage.getItem("USER_ID")===product.sellerId.toString()?
-                        <div className="flex-row f-between" style={{width:"17em"}}>
-                            <a href={`/users/${product.sellerId}/products/${product._id}/edit`}>Edit</a>
-                            <ARB btnStyle={{height:"2em"}} onClick={deleteProduct} label="Delete"/>
+                        <div className="flex-row f-between wrap" style={{width:"15em", padding:"1em", margin:"1em auto", borderTop:"1px solid #ccc"}}>
+                            <a style={{width:"5em"}} className="custom-button" href={`/users/${product.sellerId}/products/${product._id}/edit`}>Edit</a>
+                            <ARB 
+                                confirm={{
+                                    message:"You are about to delete the product! Are you sure?",
+                                    ok:"Yes", 
+                                    cancel:"No"
+                                }} 
+                                btnStyle={{ width:"6em", height:"2.1em"}} 
+                                onClick={deleteProduct} 
+                                label="Delete"
+                                btnClass="custom-button"
+                            />
+                                
                         </div>
                     : null
                 }

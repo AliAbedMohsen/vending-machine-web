@@ -55,21 +55,19 @@ export default (props) => {
         
         return(
 
-            <div className="profile-page-wrapper ">
+            <div className="dashboard-page-wrapper ">
                 <h2>User Dashboard</h2>
-                <div className='profile-responsive-layout'>
-                <div className='flex-row center'>{`Hey ${user.username}! Here are the available actions for you as a ${user.role.toLowerCase()}.`}</div>
-                    <div className='flex-col f-start' style={{alignItems:"center", margin:"auto 1em"}} >
-                        <div className='flex-row f-between'>
+                <div className='flex-col'>
+                    <span>
+                        {`Hey ${user.username}! Here are the available actions for you as a ${user.role.toLowerCase()}.`}
+                    </span>
+                    <div className='flex-col w-fill f-start' style={{alignItems:"center", margin:"2em"}} >
+
+                        <div className='role-options flex-row w-fill f-around wrap' >
+
                             <a href={"/products/create"}>Add New Product</a>
                             <a href={`/users/${user._id}/products`}>My Products</a>
                         </div> 
-                    </div>
-                    <div className='flex-col' style={{alignItems:"flex-start", justifyContent:"center", width:"inherit"}}>
-                        <div className='flex-row w-fill'>
-                        </div>
-
-
                     </div>
 
 

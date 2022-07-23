@@ -59,9 +59,15 @@ const Deposit = ( props ) => {
     
     return(
         
-        <Modal btnStyle={{height:"4em", width:"8em", margin:"0.2em", borderRadius:"5px", border:"1px solid #000"}} openButton="Add Deposit" onClose={reset} onOpen={init} >
+        <Modal 
+            openBtnStyle={{height:"4em", width:"8em", margin:"0.2em", borderRadius:"5px", border:"1px solid #000"}} 
+            openButton="Add Deposit" 
+            onClose={reset} 
+            onOpen={init} 
+            closeButton="X"
+        >
             <div className="flex-col">
-                <span>Current Balance: {deposit+" "}Cents</span>
+                <span >Current Balance: {deposit+" "}Cents</span>
                 <CustomPicker 
                     placeholder={'Select Deposit'} 
                     setPicked={(picked) => onAttributeChange(picked, 'deposit')} 

@@ -105,9 +105,7 @@ const Login= ( props ) => {
 	return( 
         
         <div style={{display:"flex", justifyContent:"center", alignItems:"center", flexDirection:"column", paddingTop:"2%"}}>
-            <div style={{textAlign:"center"}}>
-                VENDING MACHINE
-            </div>
+
 	        <div className="flex-col main-login-container">
 	            
 	           <div className="logo-container">
@@ -118,7 +116,7 @@ const Login= ( props ) => {
 
 	           <div className="title-container">
 	               
-	               <span style={{color:BASE_COLOR}}>
+	               <span style={{color:BASE_COLOR, borderBottom:"1px solid #000"}}>
 					   Login
 				   </span>
 	           </div>
@@ -126,8 +124,6 @@ const Login= ( props ) => {
 
 	           <div className=" flex-col">
 	               
-	               {/* <label> Email: <input  onChange={(e) => onTextInputChange(e.target.value, 'email')} type="text"/> </label>*/}
-	               {/* <label> Password: <input autoComplete={false} onChange={(e) => onTextInputChange(e.target.value, 'password')} type="password"/></label> */}
 				    <CustomInput 
 					    style={{width:"14.5em",  margin:"0.5em auto", border:`1px solid ${BASE_COLOR}`}}
 						placeholder={'your username..'} 
@@ -148,16 +144,22 @@ const Login= ( props ) => {
 					/>
                      
 					<CustomButton 
-					    btnStyle={{width:"14.5em", margin:"0.5em auto", color:"#777"}} 
+					    
+						btnStyle={{
+							width:"17.5em", 
+							margin:"0.5em auto", 
+							backgroundColor:BASE_COLOR
+						}} 
+
 						onClick={login}  
-						label={"Login"}
+						label={<span style={{color:"#fff"}}>Login</span>}
 						loader={"Loading..."}
 					/>
 					
-					<a className="nav-links" href="/reset_password">
+					{/* <a className="nav-links" href="/reset_password">
 					{"Forgot password?"}
 						
-					</a>
+					</a> */}
 					<a className="nav-links" href="/register">
 						
 						{"Don't have an account? Create new one."}

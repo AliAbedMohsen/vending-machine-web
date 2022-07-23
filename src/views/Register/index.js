@@ -135,9 +135,17 @@ const Register = (props) => {
                     </span>
 
                     <CustomButton 
-					    btnStyle={{width:"14.5em", margin:"0.5em auto", backgroundColor:BASE_COLOR, color:"#fff"}} 
+
+                        btnStyle={{
+                            width:"17.5em", 
+                            margin:"0.5em auto", 
+                            backgroundColor:BASE_COLOR
+                        }} 
+                        label={<span style={{color:"#fff"}}>Create Account</span>}
+                        loader={"Loading..."}
                         onClick={onSubmit} 
-                        label={"Create Account"} 
+                         
+                        
                     />
             
                 </div>  

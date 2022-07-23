@@ -3,80 +3,6 @@
 import React, { useEffect } from 'react'
 import Helpers from './Helpers'
 
-// const CustomInput =  (props) => {
-   
-//     let { errorText} = props
-    
-//     let inputStyle= { 
-//                   width:"100%", 
-//                   // padding:'10px',  
-//                   fontSize:'16px', 
-//                   // borderColor:errorText && errorText.length > 0 ? "red" : "#777",
-//                   borderRadius:"5px",
-//                   borderStyle:"none",
-//                   outline:"none",
-//                   "-webkit-transform": "translateZ(0px)"
-//     }   
-    
-//     // useEffect(()=> alert(props.errorText), [props.errorText])
-//     // fieldSetStyle.borderColor =  errorText && errorText.length > 0 ? "red" : "#777"
-
-    
-//     let requiredStyle= props.dir==="rtl" ? 
-//      {...styles.required, left:"5px"} 
-//     : {...styles.required, right:"5px" }
-    
-//     let legendStyle= props.dir==="rtl" ? 
-//       {...styles.legend, right:"10px"} 
-//     : {...styles.legend, left: '10px'}
-    
-//     const renderValue= (v) =>{
-//       if(v){
-
-//         switch(props.valueAppearance) {
-//           case 'UPPERCASE':
-
-//           return v.toUpperCase()
-
-//           case 'CAPITALIZE' :
-//             return Helpers.capitalize(v)
-
-//           default : return v
-//         }
-//       }
-
-//       return v
-//     }
-
-//     return (
-      
-//       <div dir={props.dir} style={styles.col}>
-   
-//         <div style={{...styles.fieldSet, ...styles.row, ...props.style || {} }}  >
-          
-//         <legend style={legendStyle}> {props.label}  </legend>
-//           {props.required? <span style={requiredStyle}> * </span> : null}
-//             {props.prefix? <span style={styles.prefix}>{props.prefix}</span>:null}
-//     	      <input 
-//     	        value={props.value}
-//               defaultValue={renderValue(props.defaultValue)}
-//     	        onChange={props.onTextChange}
-//               placeholder={props.placeholder}
-//     	        ref={props.reference}
-//               type={props.type || "text"}
-//     	        style = { props.inputStyle || inputStyle}  
-    	        
-//     	      /> 
-// 	      </div>	
- 
-// 	      {errorText ? <span style={{...styles.error, ...props.errorTextStyle}}>{errorText}</span> : null}
-	    
-// 	    </div>        
-    
-//    	) 
-// }
-
-
 const CustomInput = React.forwardRef ((props, ref) => {
    
   let { errorText} = props
@@ -89,7 +15,7 @@ const CustomInput = React.forwardRef ((props, ref) => {
                 borderRadius:"5px",
                 borderStyle:"none",
                 outline:"none",
-                "-webkit-transform": "translateZ(0px)"
+                WebkitTransform: "translateZ(0px)"
   }   
   
   // useEffect(()=> alert(props.errorText), [props.errorText])
@@ -129,7 +55,7 @@ const CustomInput = React.forwardRef ((props, ref) => {
       <div style={{...styles.fieldSet, ...styles.row, ...props.style || {} }}  >
         
       <legend style={legendStyle}> {props.label}  </legend>
-        {props.required? <span style={requiredStyle}> * </span> : null}
+          {props.required? <span style={requiredStyle}> * </span> : null}
           {props.prefix? <span style={styles.prefix}>{props.prefix}</span>:null}
           <input 
             value={props.value}
@@ -140,7 +66,8 @@ const CustomInput = React.forwardRef ((props, ref) => {
             type={props.type || "text"}
             style = { props.inputStyle || inputStyle}
             disabled={props.disabled}
-            readOnly={props.readOnly}  
+            readOnly={props.readOnly}
+            autoComplete={props.autoComplete ? props.autoComplete : "off"}  
             
           /> 
       </div>	
@@ -246,7 +173,5 @@ let styles = {
         marginInlineStart:"0.2em"
       }
 }
-
-
 
 export default CustomInput
