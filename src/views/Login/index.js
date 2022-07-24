@@ -16,12 +16,9 @@ import CustomInput from '../shared/CustomInput';
 
 import Helpers from '../shared/Helpers.js'
 
-import { BASE_COLOR } from '../../constants/style'
-
-// import LOGO_DARK from '../Navbar/logo-light-4.png'
-// import LOGO_DARK from '../Navbar/ashtaghil-no-bg.png'
-
-// import LOCK from './lock1.png'
+import { BASE_COLOR, COVER_COLOR } from '../../constants/style'
+import Dialog from "../shared/Dialog/Dialog";
+import { AsynchronousReactButton as ARB } from "asynchronous-react-button";
 
 
 const resolveError= Helpers.resolveError
@@ -34,11 +31,12 @@ const Login= ( props ) => {
     
     const [loginError, setLoginError] = useState(null)
 
+	const [logoutAllData, setlogoutAllData] = useState({isShown:false, count:0})
+
     const login = async (releaseBtn) => {
         
 		setLoginError(null)
-		
-    
+	
 		try{
            
            let response = await Users.login(credencials)
@@ -64,10 +62,12 @@ const Login= ( props ) => {
 	                releaseBtn()
                     
 					if(multiActiveSessions) {
-                     debugger
+						setlogoutAllData({isShown:true, count:multiActiveSessions.count })
+					} else {
+						window.location.replace("/users/"+user._id)
 					}
 
-					window.location.replace("/users/"+user._id)
+					
 
 
 	            } else {
@@ -95,6 +95,32 @@ const Login= ( props ) => {
 
 
     }
+    
+	const logoutAll = async (releaseBtn) => {
+       
+		try {
+			
+			const response = await Users.logoutAll()
+			
+			if(response.request.status===204) {
+				  
+				  setlogoutAllData({isShown:false,count:0})
+				  sessionStorage.removeItem("AUTH_TOKEN")
+                  window.location.replace("/login")
+			}
+
+            releaseBtn()
+		
+		} catch (error) {
+			releaseBtn()
+		    console.log("logoutAll error", error)	
+		}
+	}
+    
+	const closeLogoutAllPanel =() => {
+      setlogoutAllData({isShown:false})
+	  window.location.replace("/login")
+	}
 
     const onTextInputChange = ( value, key ) => {
       
@@ -169,13 +195,58 @@ const Login= ( props ) => {
 	           
 
 	        </div>
-	    
+	        <LogoutAllPanel onClose={closeLogoutAllPanel} data={logoutAllData} logoutAll={logoutAll}  />
 	    </div>
 
 
 	)
 
 } 
+
+const LogoutAllPanel= ( {data, logoutAll, onClose} ) => {
+	let {isShown, count}= data
+    return(
+        <Dialog innerWrapperStyle={styles.dialog} onClose={onClose} isShown={isShown}>
+            <div className="flex-col f-between w-fill">
+                <div className="flex-row f-between w-fill">
+                    <span style={styles.activeSessionsLable}>
+						`There are ${count} sessions including this one for this account.`
+                    </span>
+                </div>
+
+                <div className="flex-row  w-fill">
+                    
+                    <ARB 
+                         
+                        onClick={logoutAll} 
+                        btnStyle={{width:"12em", backgroundColor:"#777"}} 
+                        label={
+                            <span 
+                                style={{
+                                    color:COVER_COLOR, 
+                                    fontWeight:"700",
+                                    fontSize:"0.8em"
+                                }}
+                            >
+                                Logout all active sessions
+                            </span>
+                        } 
+                        
+						confirm={{message:"Terminate all sessions?", ok:"Yes", cancel:"No" }}
+                    />
+                </div>
+
+            </div>
+        </Dialog>
+    )
+}
+
+const styles= {
+    dialog:{width:"15em", backgroundColor:"#ccc"},
+    activeSessionsLable:{fontSize:"0.8em", color:"brown", fontWeight:"bolder"},
+
+}
+
 
 export default Login
 

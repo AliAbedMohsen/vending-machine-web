@@ -5,7 +5,7 @@ import ProductItem from "./ProductItem";
 import { Products, Users } from "../../server-api";
 import Dialog from "../shared/Dialog/Dialog";
 import { AsynchronousReactButton as ARB } from "asynchronous-react-button";
-import { BASE_COLOR } from "../../constants/style";
+import { BASE_COLOR, COVER_COLOR } from "../../constants/style";
 
 export default ( props ) => {
     
@@ -106,7 +106,7 @@ export default ( props ) => {
                         })
                     }
 
-                    <Invoice  collectChange={collectChange} onClose={()=> setInvoice({open:false, data:{} }) } invoice={invoice} />
+                    <Invoice dismissInvoice={()=>setInvoice({open:false, data:{}})}  collectChange={collectChange} onClose={()=> setInvoice({open:false, data:{} }) } invoice={invoice} />
                 </div>
             </div>
         )
@@ -114,35 +114,52 @@ export default ( props ) => {
 }
 
 
-const Invoice= ( {onClose, collectChange, invoice} ) => {
+const Invoice= ( {onClose, collectChange, invoice, dismissInvoice} ) => {
     let amount= invoice.data.product && invoice.data.spent? parseInt(invoice.data.spent)/parseInt(invoice.data.product.cost) : 0
     return(
         <Dialog innerWrapperStyle={styles.dialog} onClose={onClose} isShown={invoice.open}>
             <div className="flex-col f-between w-fill">
-                <div className="flex-row">
+                <div className="flex-row f-between w-fill">
                     <span style={styles.purchaseLabel}>You purchased
-                    <span>{invoice.data.product ? ` ${amount} ${invoice.data.product.name} items` : ""}</span>
+                    <span style={styles.purchase}>{invoice.data.product ? ` ${amount} ${invoice.data.product.name} item(s)` : ""}</span>
                     </span>
                 </div>
 
                 <div className="flex-row f-between w-fill">
-                    <span style={styles.total}>Total spent=
-                        <span>{invoice.data.spent}&#162;</span>
+                    <span style={styles.spentLabel}>You have spent
+                        <span style={styles.spent} >{" "+invoice.data.spent}&#162;</span>
                     </span>
                 </div>
 
                 <div className="flex-row f-between w-fill">
-                    <span style={styles.change}>Change Items:</span>
+                    <span style={styles.change}>Change:</span>
                     {
                         invoice.data.change? 
-                            invoice.data.change.map((c, i)=> <span key={i}>{c}&#162;</span> )
+                            invoice.data.change.map((c, i)=> <span style={styles.coin} key={i}>{c}&#162;</span> )
                         :null
                     }
                 </div>
 
                 <div className="flex-row f-between w-fill">
                     
-                    <ARB label="Collect Change?" onClick={collectChange} />
+                    <ARB 
+                         
+                        onClick={collectChange} 
+                        btnStyle={{width:"8em", backgroundColor:"#777"}} 
+                        label={
+                            <span 
+                                style={{
+                                    color:COVER_COLOR, 
+                                    fontWeight:"700",
+                                    fontSize:"0.8em"
+                                }}
+                            >
+                                Collect Change?
+                            </span>
+                        } 
+                        confirm={{message:"Collect Coins?", ok:"Yes", cancel:"No" }}
+                    />
+                    <button onClick={dismissInvoice} className="custom-botton" >Keep Shopping</button>
                 </div>
 
             </div>
@@ -152,7 +169,11 @@ const Invoice= ( {onClose, collectChange, invoice} ) => {
 
 const styles= {
     dialog:{width:"15em", backgroundColor:"#ccc"},
-    purchaseLabel:{fontSize:"0.8em", color:"green", fontWeight:"bolder"},
-    total:{fontSize:"0.8em", color:"red", fontWeight:"bolder"},
+    purchaseLabel:{fontSize:"0.8em", color:"brown", fontWeight:"bolder"},
+    purchase:{fontSize:"1.2em", color:"green", fontWeight:"bolder"},
+    spentLabel:{fontSize:"0.8em", color:"brown", fontWeight:"bolder"},
+    spent:{fontSize:"1.2em", color:"green", fontWeight:"bolder"},
+    change:{fontSize:"0.8em", color:"brown", fontWeight:"bolder"},
+    coin:{borderRadius:"50%", border:"2px solid brown", textAlign:"center", padding:"2%"},
     collect:{}
 }
