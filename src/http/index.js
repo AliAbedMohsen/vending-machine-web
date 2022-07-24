@@ -106,8 +106,11 @@ export default class HTTP  {
       } else if(response.request.status===404){
         window.location.replace("/404")
         return
-      }
 
+      } else if(response.request.status===500){
+        window.location.replace("/500")
+        return
+      }
     	return response
     }
 

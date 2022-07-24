@@ -34,7 +34,7 @@ function App() {
 
       {name:"Product", url:"/products/:id", component:Product},
 
-      {name:"My Products", url:"/users/:id/products", component:Products},
+      {name:"My Products", url:"/users/:id/products", component:MyProducts},
 
       {name:"Edit Product", url:"/users/:id/products/:pid/edit", component:EditProduct},
 

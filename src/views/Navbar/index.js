@@ -142,7 +142,7 @@ const Navbar = (props) => {
 
       if(userRole==="SELLER") {
         links.push(
-          {name:"My Products", url:`/products` },
+          {name:"All Products", url:`/products` },
           {name:"Dashboard", url:`/users/${user_id}` },
           {name:"Create Product", url:`/products/create` },
           {name:"Logout", onClick:logout }

@@ -67,6 +67,22 @@ export default class Users {
 		return await request.send()
 	}
 
+	static async myProducts ( {uid} ) {
+        
+
+		let request = new HTTP()
+
+		request.setMethode("GET")
+
+		let token =  sessionStorage.getItem("AUTH_TOKEN")
+		
+		request.setHeaders({ Authorization: token})
+		
+		request.setUrl(`/api/users/${uid}/products`)
+        
+		return await request.send()
+	}
+
     static async delete ( {pid} ) {
         
         let token =  sessionStorage.getItem("AUTH_TOKEN")

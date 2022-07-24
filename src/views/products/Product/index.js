@@ -4,11 +4,13 @@ import BigLoader from '../../shared/Loader/big'
 import { Products } from "../../../server-api";
 import {AsynchronousReactButton as ARB} from 'asynchronous-react-button'
 import Helpers from "../../shared/Helpers";
+import { useHistory } from "react-router-dom";
+
 import { BASE_COLOR } from "../../../constants/style";
 
 export default ( props ) => {
-    
 
+    let history = useHistory();
     let [isLoading, setIsLoading] = useState(true) 
     let [product, setProduct] = useState({}) 
     
@@ -102,26 +104,36 @@ export default ( props ) => {
                     <span>Seller :</span>
                     <span>{product.seller.username}</span>
                 </div>
+                
+                <div className="flex-row f-between wrap" style={{width:"15em", padding:"1em", margin:"1em auto", borderTop:"1px solid #ccc"}}>
+                    <a style={{width:"4em"}} onClick={()=>history.goBack()} className="custom-button">Back</a>
+
                 {
                     sessionStorage.getItem("AUTH_TOKEN") && sessionStorage.getItem("USER_ID")===product.sellerId.toString()?
-                        <div className="flex-row f-between wrap" style={{width:"15em", padding:"1em", margin:"1em auto", borderTop:"1px solid #ccc"}}>
-                            <a style={{width:"5em"}} className="custom-button" href={`/users/${product.sellerId}/products/${product._id}/edit`}>Edit</a>
-                            <ARB 
-                                confirm={{
-                                    message:"You are about to delete the product! Are you sure?",
-                                    ok:"Yes", 
-                                    cancel:"No"
-                                }} 
-                                btnStyle={{ width:"6em", height:"2.1em"}} 
-                                onClick={deleteProduct} 
-                                label="Delete"
-                                btnClass="custom-button"
-                            />
-                                
-                        </div>
+                        
+                        <a style={{width:"4em"}} className="custom-button" href={`/users/${product.sellerId}/products/${product._id}/edit`}>Edit</a>
+                         
                     : null
                 }
 
+                {
+                    sessionStorage.getItem("AUTH_TOKEN") && sessionStorage.getItem("USER_ID")===product.sellerId.toString()?
+                                                  
+                        <ARB 
+                            confirm={{
+                                message:"You are about to delete the product! Are you sure?",
+                                ok:"Yes", 
+                                cancel:"No"
+                            }} 
+                            btnStyle={{ width:"4.9em", height:"2.1em"}} 
+                            onClick={deleteProduct} 
+                            label="Delete"
+                            btnClass="custom-button"
+                        />
+                                
+                    : null
+                }
+                </div>
             </div>
         )
     }       

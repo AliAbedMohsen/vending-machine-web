@@ -51,7 +51,7 @@ export default (props) => {
     return(
         <div ref={blurDiv} style={{zIndex: shown? "999": "-1", display: shown? "flex": "none", ...blurDivStyle}} className={'dialog'}>
             <div className={"overlay"}></div>
-            <div className={"inner-wrapper"}>
+            <div className={"inner-wrapper"} style={ props.innerWrapperStyle || {} }>
             <button className="close-dialog-btn" onClick={onClose}>X</button>
 
                 {props.children}

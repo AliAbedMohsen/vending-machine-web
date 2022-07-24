@@ -106,7 +106,7 @@ export default ( props ) => {
                         })
                     }
 
-                    <Invoice collectChange={collectChange} onClose={()=> setInvoice({open:false, data:{} }) } invoice={invoice} />
+                    <Invoice  collectChange={collectChange} onClose={()=> setInvoice({open:false, data:{} }) } invoice={invoice} />
                 </div>
             </div>
         )
@@ -115,25 +115,27 @@ export default ( props ) => {
 
 
 const Invoice= ( {onClose, collectChange, invoice} ) => {
-    
+    let amount= invoice.data.product && invoice.data.spent? parseInt(invoice.data.spent)/parseInt(invoice.data.product.cost) : 0
     return(
-        <Dialog onClose={onClose} isShown={invoice.open}>
+        <Dialog innerWrapperStyle={styles.dialog} onClose={onClose} isShown={invoice.open}>
             <div className="flex-col f-between w-fill">
                 <div className="flex-row">
-                    <span>Purchased:</span>
-                    <span>{invoice.data.product ? invoice.data.product.name : ""}</span>
+                    <span style={styles.purchaseLabel}>You purchased
+                    <span>{invoice.data.product ? ` ${amount} ${invoice.data.product.name} items` : ""}</span>
+                    </span>
                 </div>
 
                 <div className="flex-row f-between w-fill">
-                    <span>Total Spent:</span>
-                    <span>{invoice.data.spent+" "}Cents</span>
+                    <span style={styles.total}>Total spent=
+                        <span>{invoice.data.spent}&#162;</span>
+                    </span>
                 </div>
 
                 <div className="flex-row f-between w-fill">
-                    <span>Change Items:</span>
+                    <span style={styles.change}>Change Items:</span>
                     {
                         invoice.data.change? 
-                            invoice.data.change.map((c, i)=> <span key={i}>{c+" "}Cents</span> )
+                            invoice.data.change.map((c, i)=> <span key={i}>{c}&#162;</span> )
                         :null
                     }
                 </div>
@@ -146,4 +148,11 @@ const Invoice= ( {onClose, collectChange, invoice} ) => {
             </div>
         </Dialog>
     )
+}
+
+const styles= {
+    dialog:{width:"15em", backgroundColor:"#ccc"},
+    purchaseLabel:{fontSize:"0.8em", color:"green", fontWeight:"bolder"},
+    total:{fontSize:"0.8em", color:"red", fontWeight:"bolder"},
+    collect:{}
 }
