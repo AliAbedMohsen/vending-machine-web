@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 
 import './index.css'
 
 import Buyer from './Buyer'
 import Seller from './Seller'
 
-export default (props) => {
+const Dashboard= (props) => {
     
     const role = sessionStorage.getItem("ROLE")
 
@@ -17,4 +17,6 @@ export default (props) => {
         return <span>Invalid Role!</span>
     }
 }
+
+export default Dashboard
 

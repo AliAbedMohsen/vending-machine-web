@@ -64,10 +64,10 @@ function App() {
                     })
                     
                 }
-
+              <Route path="/500" component={ServerError} />
+              <Route path="/403" component={Unauthorized} />
               <Route path="/404" component={GenericNotFound} />
-              
-            
+              <Route path="*" component={GenericNotFound} />
               </Switch>
               </div>
             </div>  
@@ -78,7 +78,8 @@ function App() {
 	)
 }
 
-const GenericNotFound = () => <span style={{padding:"30px"}}>Resource Not Found!</span>
-
+const GenericNotFound = () => <span style={{padding:"30px"}}>Resource Not Found! Code 404.</span>
+const Unauthorized = () => <span style={{padding:"30px"}}>You are not authorized to do this action! Code 403.</span>
+const ServerError = () => <span style={{padding:"30px"}}>Internal server error with code 500.</span>
 
 export default App;

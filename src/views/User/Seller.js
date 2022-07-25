@@ -5,14 +5,12 @@ import './index.css'
 import BigLoader from '../shared/Loader/big'
 import { Users } from '../../server-api'
 
-export default (props) => {
+const Seller= (props) => {
     
     let [user, setUser] = useState({})
     
     let [isLoading, setIsLoading] = useState(true)
-    
-    const CurrentUserID = sessionStorage.getItem("USER_ID")
-    
+        
     const getResources = async ()=> {
         
         try{
@@ -20,21 +18,18 @@ export default (props) => {
             let id = props.match.params.id
        
             let response = await Users.user({id})
-            if(response.data && response.data){
+            
+            if(response.data){
 
                 
                 setUser(response.data.user)
-                
                 setIsLoading(false)
-            } else {
-                
-                
-                window.location.replace("/unexpected?s="+response.request.status)
-            }
+            } 
+
             
         }catch(error){
             
-            window.location.replace("/unexpected?e="+error)
+            alert("something went wrong!")
         }  
     
         
@@ -81,3 +76,4 @@ export default (props) => {
 
 }
 
+export default Seller

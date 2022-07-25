@@ -73,9 +73,9 @@ export default class HTTP  {
             
     				url: HOST + this.url,
             
-            withCredentials:true,
+            // withCredentials:true,
 
-            headers: this.headers,
+            headers: {...this.headers, ...{'Content-Type': 'application/json'}},
 
     				params: this.params,
 
@@ -101,7 +101,7 @@ export default class HTTP  {
         window.location.replace("/login")
         return
       } else if(response.request.status===403){
-        window.location.replace("/unauthorized")
+        window.location.replace("/403")
         return
       } else if(response.request.status===404){
         window.location.replace("/404")

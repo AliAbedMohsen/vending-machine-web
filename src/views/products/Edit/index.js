@@ -9,11 +9,8 @@ import { BASE_COLOR } from "../../../constants/style";
 
 const resolveError= Helpers.resolveError
 
-export default ( props ) => {
+const Edit = ( props ) => {
     let pid = props.match.params.pid
-
-    let uid = props.match.params.id
-
 
     let [payload, setPayload]= useState({})
 
@@ -38,10 +35,7 @@ export default ( props ) => {
             
             if(response.data) {
                 setProduct(response.data.product)
-            } else {
-              // redirect
-              alert()
-            }  
+            }
             
             setIsLoading(false)      
 
@@ -50,6 +44,7 @@ export default ( props ) => {
             setIsLoading(false)
            
             console.log('fetchProduct > error', error)
+            alert("something went wrong!")
         } 
 
     }
@@ -71,10 +66,7 @@ export default ( props ) => {
                 if(response.request.status===400){
                     setError(response.response.data.error)
                 } 
-
-                else {
-                    window.location.replace('/unexpected')
-                }        
+      
             }
             
             releaseBtn()
@@ -84,6 +76,8 @@ export default ( props ) => {
             console.log("create product > error", error )
         
             releaseBtn()
+
+            
         
         }
     }
@@ -154,3 +148,5 @@ export default ( props ) => {
         )
     }
 }
+
+export default Edit

@@ -8,7 +8,7 @@ import { BASE_COLOR } from "../../../constants/style";
 
 const resolveError= Helpers.resolveError
 
-export default ( props ) => {
+const Create= ( props ) => {
 
     let [payload, setPayload]= useState({})
     
@@ -35,11 +35,7 @@ export default ( props ) => {
                 if(response.request.status===400){
                     setError(response.response.data.error)
                 } 
-
-                else {
-                    window.location.replace('/unexpected')
-                }
-                
+ 
         
             }
             
@@ -86,7 +82,7 @@ export default ( props ) => {
             />
 
             <CustomInput 
-                placeholder={"an integer devisable by 5"}
+                placeholder={"an integer divisible by 5"}
                 label="Product Cost"  
                 errorText={costError}  
                 type={"number"} 
@@ -103,8 +99,11 @@ export default ( props ) => {
                     margin:"0.5em auto", 
                     backgroundColor:BASE_COLOR
                 }} 
+                
                 label={<span style={{color:"#fff"}}>Submit</span>}
             />
         </div>
     )
 }
+
+export default Create

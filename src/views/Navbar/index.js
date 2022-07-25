@@ -3,9 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import {Users} from "../../server-api"
-import {  Link, useLocation } from 'react-router-dom';
+import {  useLocation } from 'react-router-dom';
 import './index.css'
-import { AsynchronousReactButton as ARB } from 'asynchronous-react-button';
 import { BASE_COLOR } from '../../constants/style';
 
 
@@ -114,14 +113,7 @@ const Navbar = (props) => {
   ]
 
   const rightLinks= [
-    // {name:`Welcome ${username}!`}
-          // {name:"My Balance", url:"/balance"},
-    // {name:"Dashboard", url:`/users/${user_id}/dashboard` },
 
-    // {name:"Login", url:"/login" }, 
-    // {name:"Logout", url:"/logout" },   
-
-    // {name:"Register", url:"/register" },
   ]    
   
   if(!user_id || !token || user_id==="undefined" || token==="undefined" ) {
@@ -135,10 +127,6 @@ const Navbar = (props) => {
       
 
   } else if(user_id && token ) {
-      rightLinks.push(
-        // {name:"Balance", url:`/users/${user_id}/balance` }, 
-        // {name:"Logout", onClick:()=>logout() } 
-      )
 
       if(userRole==="SELLER") {
         links.push(
@@ -157,7 +145,9 @@ const Navbar = (props) => {
         )
       }
 
-  } else {alert('unkown condition from navbar')}
+  } else {
+    // alert('unkown condition from navbar')
+  }
 
   return(
 

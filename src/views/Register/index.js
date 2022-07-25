@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 
 // import headerImg from './header-img.jpg'
 // import ICON from './personal.png'
@@ -39,13 +39,13 @@ const Register = (props) => {
         try {
             
             let response = await Users.register(payload)
-            
+            debugger
             if(response && response.data ) {
-                window.open(`/login`,"_self")
+                window.location.replace(`/login`)
             } else if(response.request.status===400) {
                 setError(response.response.data.error)
             } else {
-                window.open(`/unexpected`,"_self")
+                alert("something went wrong!")
             }
         
             releaseBtn()
@@ -58,7 +58,6 @@ const Register = (props) => {
            
            releaseBtn()
 
-           window.open(`/unexpected`,"_self")
         }
         
     }

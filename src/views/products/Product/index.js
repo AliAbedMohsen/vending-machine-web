@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 import { BASE_COLOR } from "../../../constants/style";
 
-export default ( props ) => {
+const Product = ( props ) => {
 
     let history = useHistory();
     let [isLoading, setIsLoading] = useState(true) 
@@ -59,7 +59,7 @@ export default ( props ) => {
 
             releaseBtn()
 
-            console.log("delete prodect error", error)
+            console.log("delete product error", error)
         }
 
     } 
@@ -138,3 +138,5 @@ export default ( props ) => {
         )
     }       
 }
+
+export default Product

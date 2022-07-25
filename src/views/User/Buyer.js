@@ -3,17 +3,15 @@ import React, {useState, useEffect} from 'react'
 import './index.css'
 
 import BigLoader from '../shared/Loader/big'
-import { Users, Ping } from '../../server-api'
+import { Users } from '../../server-api'
 import Deposit from './Deposit'
 import { AsynchronousReactButton as ARB } from 'asynchronous-react-button'
-export default (props) => {
+const Buyer= (props) => {
     
     let [user, setUser] = useState({})
     
     let [isLoading, setIsLoading] = useState(true)
-    
-    const CurrentUserID = sessionStorage.getItem("USER_ID")
-    
+        
     const updateDeposit= (deposit) => {
        setUser({...user, deposit})
     }
@@ -25,48 +23,44 @@ export default (props) => {
             let id = props.match.params.id
        
             let response = await Users.user({id})
-            if(response.data && response.data){
+            if(response.data){
 
                 
                 setUser(response.data.user)
                 
                 setIsLoading(false)
-            } else {
-                
-                
-                window.location.replace("/unexpected?s="+response.request.status)
-            }
-            
+            } 
+
+        
         }catch(error){
-            
-            window.location.replace("/unexpected?e="+error)
+            console.log("dashboard fetch resources", error)
         }  
     
         
     }
 
-    const test = async (releaseBtn)=> {
+    // const test = async (releaseBtn)=> {
         
-        try{
+    //     try{
                    
-            let response = await Ping.test()
-            debugger
-            if(response.data && response.data){
+    //         let response = await Ping.test()
+    //         debugger
+    //         if(response.data && response.data){
 
                
-            } else {
+    //         } else {
                 
                 
-                window.location.replace("/unexpected?s="+response.request.status)
-            }
-            releaseBtn()
-        }catch(error){
-            releaseBtn()
-            // window.location.replace("/unexpected?e="+error)
-        }  
+    //             window.location.replace("/unexpected?s="+response.request.status)
+    //         }
+    //         releaseBtn()
+    //     }catch(error){
+    //         releaseBtn()
+    //         // window.location.replace("/unexpected?e="+error)
+    //     }  
     
         
-    }
+    // }
 
     const reset = async (releaseBtn)=> {
         
@@ -74,13 +68,19 @@ export default (props) => {
                    
             let response = await Users.withdraw()
             
-            if(response.data && response.data){
-               alert("Your deposit have reset.")
+            if(response.data){
+               
+                alert("Your deposit have reset.")
                
             }
+
             releaseBtn()
+        
         }catch(error){
+        
             releaseBtn()
+        
+            console.log("reset > error", error )
             // window.location.replace("/unexpected?e="+error)
         }  
     
@@ -122,7 +122,7 @@ export default (props) => {
                         </span>
                     </div>
 
-                        <div className='role-options flex-row w-fill f-between wrap' >
+                        <div className='role-options flex-row w-fill wrap' >
 
                             <Deposit 
                                 updateDeposit={updateDeposit} 
@@ -140,11 +140,12 @@ export default (props) => {
                                 }}
                             />
 
-                            <ARB 
+                            {/* <ARB 
                                 onClick={test} 
                                 label="test sessions" 
                                 btnStyle={{height:"4em", width:"8em", margin:"0.2em"}}
-                            />
+                            /> */}
+                            
                         </div> 
                     </div>
 
@@ -159,3 +160,4 @@ export default (props) => {
 
 }
 
+export default Buyer
