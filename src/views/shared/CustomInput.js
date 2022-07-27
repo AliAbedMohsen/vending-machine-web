@@ -102,7 +102,8 @@ let styles = {
     error:{
       fontSize:"12px",
       color:"red",
-      padding:"8px",
+      padding:"3px",
+      marginBottom:"5px",
       textAlign:"center"
     },
 

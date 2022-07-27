@@ -20,8 +20,8 @@ import { BASE_COLOR, COVER_COLOR } from '../../constants/style'
 import Dialog from "../shared/Dialog/Dialog";
 import { AsynchronousReactButton as ARB } from "asynchronous-react-button";
 
-
 const resolveError= Helpers.resolveError
+const renderErrorMessage= Helpers.renderErrorMessage
 
 const Login= ( props ) => {
 
@@ -41,11 +41,11 @@ const Login= ( props ) => {
            
            let response = await Users.login(credencials)
            
-           let {data, message } = response
            
-           if(data){
+           debugger
+           if(response.request.status===200 && response.data){
               
-                const {token, user, message, multiActiveSessions}= data
+                const {token, user, multiActiveSessions}= response.data
                 
                 if(user && token){
 
@@ -66,25 +66,18 @@ const Login= ( props ) => {
 					} else {
 						window.location.replace("/users/"+user._id)
 					}
+				}
 
-					
+           } else if(response.request.status===400) {
 
-
-	            } else {
-
-                    setLoginError(message)
-					
-					releaseBtn()
-	            
-	            }
-
-           } else {
-           
-			    setLoginError(message)
-				
+			    setLoginError( renderErrorMessage( response.response.data.message) )
 				releaseBtn()
-
-           }
+           } else {
+			           
+				setLoginError("unkown error")
+					
+				releaseBtn()
+		   }
 
         } catch (err) {
            
