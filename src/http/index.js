@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import {HOST} from '../constants'
 
-axios.defaults.withCredentials=true
+// axios.defaults.withCredentials=true
 export default class HTTP  {
    
     constructor ( method, url, params, body, headers, uploadProgressHandler ) {
@@ -63,38 +63,38 @@ export default class HTTP  {
         
         let response = null
         let request= this
-    	// try{
 
-    		response =await axios(
-    			
-          {
-    				// adapter: fetchAdapter,
-    				method: this.method,
+        let options=           {
+          // adapter: fetchAdapter,
+          method: this.method,
+          
+          url: HOST + this.url,
+          
+          withCredentials:true,
+
+          headers: {...this.headers, ...{'Content-Type': 'application/json'}},
+
+          params: this.params,
+
+          onUploadProgress: function( progressEvent ) {
             
-    				url: HOST + this.url,
-            
-            // withCredentials:true,
+            if(request.uploadProgressHandler) {
 
-            headers: {...this.headers, ...{'Content-Type': 'application/json'}},
-
-    				params: this.params,
-
-            data: this.method !== "GET" ? this.body : {},
-
-            onUploadProgress: function( progressEvent ) {
-              
-              if(request.uploadProgressHandler) {
-
-                  let percentCompleted = Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total )
-                  
-                  request.uploadProgressHandler(percentCompleted)
-              }
-              
+                let percentCompleted = Math.round( ( progressEvent.loaded * 100 ) / progressEvent.total )
+                
+                request.uploadProgressHandler(percentCompleted)
             }
+            
+          }
 
-    			}
+        }
+        
+        if(this.method !== "GET") {
+          options.data=this.body
 
-    		).catch (err => err)
+        }
+
+    		response =await axios(options).catch (err => err)
 
       // debugger
       if(response.request.status===401){
