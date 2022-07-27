@@ -6,7 +6,7 @@ import { Products, Users } from "../../server-api";
 import Dialog from "../shared/Dialog/Dialog";
 import { AsynchronousReactButton as ARB } from "asynchronous-react-button";
 import { BASE_COLOR, COVER_COLOR } from "../../constants/style";
-
+import Helpers from "../shared/Helpers";
 export default ( props ) => {
     
     let [isLoading, setIsLoading] = useState(true) 
@@ -44,7 +44,7 @@ export default ( props ) => {
                 setInvoice({open:true, data:response.data})
              } else if(response.request.status===400) {
                 
-               alert(response.response.data.error)
+               alert(Helpers.renderErrorMessage(response.response.data.error) )
              }  
              
             releaseBtn()

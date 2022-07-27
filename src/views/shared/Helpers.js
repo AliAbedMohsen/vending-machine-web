@@ -89,7 +89,10 @@ export default class Helpers {
       case "INVALID_DEPOSIT":
                              
         return "You entered invalid deposit."
+      
+      case "INSUFFICIENT_DEPOSIT":
 
+        return "Your current deposit is not enought for this purchase."
 ////////////////// PRODUCT NAME /////////////////////////////// 
       case "PRODUCT_NOT_FOUND":
                              
